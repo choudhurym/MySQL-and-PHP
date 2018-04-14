@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jay Bag Home Page</title>
+    <script>
+
+    </script>
+    <style type="text/css">
+      div.banner
+      {   background-color:blue;
+          color: white;
+          text-align: center;
+          font-size: 24pt;
+          padding: 10px;
+      }
+      div.login {
+      text-align: right;
+      font-size: 12pt;
+      }
+
+      div.body {
+      background-color: #d0d0d0;
+      text-align: center;
+      font-size: 14pt;
+      padding: 20px;
+      }
+      
+    </style>
+    <script>
+      function getCourses() {
+      var courses="<select>";
+     
+      var dept = document.getElementById("dept").value;
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("courseSelect").innerHTML =
+            this.responseText;
+      }
+      };
+      xhttp.open("GET", "getCourses.php?dept="+dept, false);
+      xhttp.send();
+      }
+    </script>
+    
+  </head>
+  <body>
+    <div class="banner">
+      Jay Bag
+      <div class="login">
+	<form name="login" method="POST" action="login.php">
+	  User: <input type="text" name="user" size="20">
+	  Password: <input type="password" name="pass" size="12">
+	  <input type="submit" value="Login">
+	</form>
+      </div>
+	<hr/>
+    </div>
+    <div class="body">
+	<p>
+	<button name="list">List Book For Sale</button>
+	</p>
+	<p>
+	  <button name="show">Show Books</button>
+	</p>
+	<form name="deptcourse" method="POST" action="showbooks">
+	<p>
+	  Department: <select id="dept" onChange="getCourses();">
+	    <option value=" ">Select Department</option>
+	    <option value="CS">Computer Science</option>
+	    <option value="MA">Mathematics</option>
+	    <option value="EGR">Engineering</option>
+	    <option value="CH">Chemistry</option>
+	    <option value="EN">English</option>
+	    <option value="PSY">Psychology</option>
+	    <option>Biology</option>
+	  </select>
+	</p>
+	<p id="courseSelect">
+	  Select the department from the list above.
+	</p>
+	</form>
+	</div>
+    </div>
+  </body>
+</html>
